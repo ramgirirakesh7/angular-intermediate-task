@@ -1,0 +1,79 @@
+<h1>HL7 FHIR TEST</h1>
+
+<form (ngSubmit)="onSubmit()" [formGroup]="dynamicForm">
+  <ng-container *ngFor="let controls of questionnaireList">
+    <div class="style-bottom style-top">{{controls.linkId}}. {{controls.text}}</div>
+
+    <span *ngIf="controls.type === 'boolean'">
+
+      <input type="radio" id='{{controls.linkId}}.Yes' class="form-control" formControlName={{controls.linkId}}
+        value="Yes" />
+      <label for='{{controls.linkId}}.Yes'>Yes</label><br>
+
+
+      <input type="radio" id='{{controls.linkId}}.No' class="form-control" formControlName={{controls.linkId}}
+        value="No" />
+      <label for='{{controls.linkId}}.No'>No</label><br>
+
+    </span>
+
+    <span *ngIf="controls.type === 'string'">
+
+      <select class="mobile-friendly" class="form-control" formControlName={{controls.linkId}}>
+        <ng-container *ngFor="let controlItems of controls.option">
+          <option>{{controlItems}}</option>
+        </ng-container>
+
+      </select>
+
+    </span>
+    <span *ngIf="controls.type === 'date'">
+      <input class="mobile-friendly" class="form-control" formControlName={{controls.linkId}} type="date"
+        value="2017-06-01">
+    </span>
+
+    <span *ngIf="controls.type === 'group'">
+
+      <ng-container *ngFor="let control of controls.item">
+        <div class="style-bottom padding-left">{{control.linkId}}. {{control.text}}
+          <div *ngIf="control.type === 'boolean'" class="padding-radio">
+
+            <input type="radio" id='{{control.linkId}}.Yes' class="form-control" formControlName={{control.linkId}}
+              value="Yes" />
+            <label for='{{control.linkId}}.Yes'>Yes</label><br>
+
+
+            <input type="radio" id='{{control.linkId}}.No' class="form-control" formControlName={{control.linkId}}
+              value="No" />
+            <label for='{{control.linkId}}.No'>No</label><br>
+
+          </div>
+          <span *ngIf="control.type === 'string'">
+
+            <select class="mobile-friendly" class="form-control" formControlName={{control.linkId}}>
+              <ng-container *ngFor="let controlItems of control.option">
+                <option>{{controlItems}}</option>
+              </ng-container>
+            </select>
+
+          </span>
+          <span *ngIf="control.type === 'date'">
+
+
+            <input class="mobile-friendly" type="date" class="form-control" formControlName={{control.linkId}}
+              value="2017-06-01">
+
+          </span>
+        </div>
+      </ng-container>
+
+    </span>
+  </ng-container>
+  <br>
+  <button type="submit" value="Submit" [disabled]="dynamicForm.invalid">Save</button>
+</form>
+<pre>
+{{output |json}}
+</pre>
+
+<router-outlet></router-outlet>

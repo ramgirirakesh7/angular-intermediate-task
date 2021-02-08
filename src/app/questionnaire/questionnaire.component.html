@@ -1,0 +1,79 @@
+<h1>HL7 FHIR TEST</h1>
+
+<form (ngSubmit)="onSubmit()" novalidate>
+  <ng-container *ngFor="let controls of questionnaireList">
+    <div class="style-bottom style-top">{{controls.linkId}}. {{controls.text}}</div>
+
+    <span *ngIf="controls.type === 'boolean'">
+
+      <input type="radio" id="yes" name={{controls.linkId}} value="Yes" />
+      <label for="yes">Yes</label><br>
+
+
+      <input type="radio" id="no" name={{controls.linkId}} value="No" />
+      <label for="no">No</label><br>
+
+    </span>
+    <span *ngIf="controls.type === 'string'">
+
+      <select class="mobile-friendly" name={{controls.linkId}}>
+        <ng-container *ngFor="let controlItems of controls.option">
+          <option>{{controlItems}}</option>
+        </ng-container>
+
+      </select>
+
+    </span>
+    <span *ngIf="controls.type === 'date'">
+      <input class="mobile-friendly" name={{controls.linkId}} type="date" value="2017-06-01">
+    </span>
+    <span *ngIf="controls.type === 'group'">
+
+      <ng-container *ngFor="let control of controls.item">
+        <div class="style-bottom padding-left">{{control.linkId}}. {{control.text}}
+          <div *ngIf="control.type === 'boolean'" class="padding-radio">
+
+            <input type="radio" id="yes" name='{{control.linkId}}' value="Yes" />
+            <label for="yes">Yes</label><br>
+
+
+            <input type="radio" id="no" name='{{control.linkId}}' value="No" />
+            <label for="no">No</label><br>
+
+          </div>
+          <span *ngIf="control.type === 'string'">
+
+            <select class="mobile-friendly" name='{{control.linkId}}'>
+              <ng-container *ngFor="let controlItems of control.option">
+                <option>{{controlItems}}</option>
+              </ng-container>
+            </select>
+
+          </span>
+          <span *ngIf="control.type === 'date'">
+
+
+            <input class="mobile-friendly" type="date" name='{{control.linkId}}' value="2017-06-01">
+
+          </span>
+        </div>
+      </ng-container>
+
+    </span>
+    <!-- <input [type]="controls.type" [formControlName]="controls.label"/>
+      <ng-container *ngFor="let validation of controls.validations">
+        <span *ngIf="dynamicForm.controls[controls.label].touched && dynamicForm.controls[controls.label].errors">
+          <p *ngIf="dynamicForm.controls[controls.label].errors[validation.name]">
+            {{validation.message}}
+          </p>
+        </span>
+    </ng-container>
+    <br> -->
+
+  </ng-container>
+  <br>
+  <!-- <input type="submit" [disabled]="!dynamicForm.valid"/> -->
+  <input type="submit" value="Submit" />
+</form>
+{{value}}
+<router-outlet></router-outlet>

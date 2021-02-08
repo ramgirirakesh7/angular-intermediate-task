@@ -1,0 +1,46 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "f201",
+  "url": "http://hl7.org/fhir/Questionnaire/f201",
+  "status": "active",
+  "subjectType": [
+    "Patient"
+  ],
+  "date": "2010",
+  "item": [
+    {
+      "linkId": "1",
+      "text": "Do you have allergies?",
+      "type": "boolean"
+    },
+    {
+      "linkId": "2",
+      "text": "What is your gender?",
+      "type": "string",
+      "group": "gender",
+      "option": [
+        "Male",
+        "Female"
+      ]
+    },
+    {
+      "linkId": "3",
+      "text": "Intoxications",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "3.1",
+          "text": "Do you smoke?",
+          "type": "boolean",
+          "group": "smoke"
+        },
+        {
+          "linkId": "3.2",
+          "text": "Do you drink alchohol?",
+          "type": "boolean",
+          "group": "alcohal"
+        }
+      ]
+    }
+  ]
+}
